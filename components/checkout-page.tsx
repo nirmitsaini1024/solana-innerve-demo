@@ -32,7 +32,7 @@ export default function CheckoutPage() {
   const { publicKey, connected, signTransaction } = useWallet()
   const { connection } = useConnection()
   const [products, setProducts] = useState<Product[]>(defaultProducts)
-  const [selectedToken, setSelectedToken] = useState<'USDC' | 'USDT'>('USDC')
+  const selectedToken = 'SOLANA'
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle')
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [txSignature, setTxSignature] = useState<string | null>(null)
@@ -161,7 +161,7 @@ export default function CheckoutPage() {
       const result = await processPayment({
         sessionId: data.sessionId,
         amount: totalAmount,
-        currency: selectedToken,
+        currency: 'SOL',
         recipientAddress: finalRecipientAddress,
         senderPublicKey: publicKey,
         signTransaction,
@@ -201,28 +201,11 @@ export default function CheckoutPage() {
 
           {/* Currency Selection */}
           <div className="mb-6">
-            <label className="block text-sm font-medium mb-2">Select Currency</label>
+            <label className="block text-sm font-medium mb-2">Payment Currency</label>
             <div className="flex gap-2">
-              <button
-                onClick={() => setSelectedToken('USDC')}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  selectedToken === 'USDC'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                USDC
-              </button>
-              <button
-                onClick={() => setSelectedToken('USDT')}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  selectedToken === 'USDT'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                USDT
-              </button>
+              <div className="px-4 py-2 rounded-lg font-medium bg-blue-600 text-white shadow-lg">
+                SOLANA
+              </div>
             </div>
           </div>
 
