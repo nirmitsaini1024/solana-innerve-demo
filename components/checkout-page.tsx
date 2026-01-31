@@ -32,7 +32,7 @@ export default function CheckoutPage() {
   const { publicKey, connected, signTransaction } = useWallet()
   const { connection } = useConnection()
   const [products, setProducts] = useState<Product[]>(defaultProducts)
-  const selectedToken = 'SOLANA'
+  const selectedToken = 'SOL'
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle')
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [txSignature, setTxSignature] = useState<string | null>(null)
