@@ -161,7 +161,6 @@ export default function CheckoutPage() {
       const result = await processPayment({
         sessionId: data.sessionId,
         amount: totalAmount,
-        currency: 'SOL',
         recipientAddress: finalRecipientAddress,
         senderPublicKey: publicKey,
         signTransaction,
