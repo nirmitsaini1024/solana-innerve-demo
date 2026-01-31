@@ -85,6 +85,116 @@ For testing purposes, you can use devnet tokens:
 - Use devnet wallet addresses
 - Set `NEXT_PUBLIC_SOLANA_NETWORK=devnet` in `.env.local`
 
+## 💳 Using the Payment Widget
+
+### Import the Payment Widget
+
+```typescript
+import { PaymentWidget } from "@/components/payment-widget"
+import type { Product } from "@/components/payment-widget/types"
+```
+
+### Basic Usage
+
+```typescript
+import { PaymentWidget } from "@/components/payment-widget"
+import type { Product } from "@/components/payment-widget/types"
+
+// Define your products
+const products: Product[] = [
+  {
+    id: "1",
+    name: "Pro Plan",
+    price: 0.5, // Amount in SOL
+    description: "Advanced features and unlimited API access"
+  },
+  {
+    id: "2",
+    name: "Premium Support",
+    price: 0.2, // Amount in SOL
+    description: "Priority support and dedicated account manager"
+  }
+]
+
+// Use the widget
+<PaymentWidget
+  apiKey={process.env.NEXT_PUBLIC_API_KEY || ''}
+  apiUrl={process.env.NEXT_PUBLIC_API_URL || ''}
+  recipientAddress={process.env.NEXT_PUBLIC_RECIPIENT_ADDRESS || ''}
+  products={products}
+  network="devnet" // or "mainnet-beta"
+  onSuccess={(data) => {
+    console.log('Payment successful!', data)
+    // Redirect to success page
+    router.push(`/success?tx=${data.txSignature}&session=${data.sessionId}`)
+  }}
+  onError={(error) => {
+    console.error('Payment error:', error)
+    alert(`Payment failed: ${error.message}`)
+  }}
+/>
+```
+
+### Payment Widget Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `apiKey` | `string` | Yes | Your API key from the dashboard |
+| `apiUrl` | `string` | Yes | Base URL of the payment gateway API |
+| `recipientAddress` | `string` | Yes | Solana wallet address to receive payments |
+| `products` | `Product[]` | Yes | Array of products to sell |
+| `network` | `'devnet' \| 'mainnet-beta'` | No | Solana network (default: `'devnet'`) |
+| `onSuccess` | `function` | No | Callback when payment succeeds |
+| `onError` | `function` | No | Callback when payment fails |
+
+### Product Type
+
+```typescript
+interface Product {
+  id: string
+  name: string
+  price: number // Amount in SOL
+  description?: string
+  metadata?: Record<string, unknown>
+}
+```
+
+### Example: Checkout Page
+
+```typescript
+"use client"
+
+import { PaymentWidget } from "@/components/payment-widget"
+import type { Product } from "@/components/payment-widget/types"
+
+export default function CheckoutPage() {
+  const products: Product[] = [
+    {
+      id: "1",
+      name: "Pro Plan",
+      price: 0.5,
+      description: "Advanced features"
+    }
+  ]
+
+  return (
+    <PaymentWidget
+      apiKey={process.env.NEXT_PUBLIC_API_KEY || ''}
+      apiUrl={process.env.NEXT_PUBLIC_API_URL || ''}
+      recipientAddress={process.env.NEXT_PUBLIC_RECIPIENT_ADDRESS || ''}
+      products={products}
+      network="devnet"
+      onSuccess={(data) => {
+        console.log('Payment successful!', data)
+      }}
+      onError={(error) => {
+        console.error('Payment error:', error)
+      }}
+    />
+  )
+}
+```
+
 ## API Integration
 
 The demo integrates with the payment gateway API:
