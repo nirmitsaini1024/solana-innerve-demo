@@ -53,20 +53,21 @@ The app will start on [http://localhost:3000](http://localhost:3000) by default.
 ## Features
 
 - ✅ Connect Solana wallet (Phantom, Solflare, etc.)
-- ✅ Select payment currency (USDC/USDT)
+- ✅ Accept payments in SOL (Solana native currency)
 - ✅ Create payment sessions via API
 - ✅ Process payments on Solana blockchain
 - ✅ View payment status and transaction signatures
 - ✅ Real-time payment confirmation
+- ✅ Beautiful, modern UI with dark mode support
 
 ## Usage
 
 1. **Connect Wallet**: Click "Select Wallet" and connect your Solana wallet (Phantom, Solflare, etc.)
 
-2. **Configure Payment**:
-   - Select currency (USDC or USDT)
-   - Recipient address auto-fills from `.env.local` (can override if needed)
-   - Review order summary
+2. **Review Order**:
+   - Products and prices are displayed in SOL
+   - Recipient address is configured from `.env.local`
+   - Review order summary and total amount
 
 3. **Process Payment**:
    - Click "Pay" button
@@ -77,11 +78,12 @@ The app will start on [http://localhost:3000](http://localhost:3000) by default.
 4. **View Results**:
    - Session ID and transaction signature will be displayed
    - Payment status will update automatically
+   - Redirect to success page on completion
 
 ## Testing on Devnet
 
-For testing purposes, you can use devnet tokens:
-- Get devnet USDC/USDT from faucets
+For testing purposes, you can use devnet SOL:
+- Get devnet SOL from faucets (e.g., https://faucet.solana.com)
 - Use devnet wallet addresses
 - Set `NEXT_PUBLIC_SOLANA_NETWORK=devnet` in `.env.local`
 
@@ -221,7 +223,8 @@ tets-okito/
 ## Troubleshooting
 
 - **Wallet not connecting**: Make sure you have a Solana wallet extension installed (Phantom, Solflare, etc.)
-- **Transaction fails**: Check that you have sufficient token balance and the recipient address is valid
+- **Transaction fails**: Check that you have sufficient SOL balance and the recipient address is valid
 - **API errors**: Verify your API key and URL are correct in `.env.local`
-- **Network issues**: Ensure you're on the correct network (devnet/mainnet) matching your tokens
+- **Network issues**: Ensure you're on the correct network (devnet/mainnet) matching your wallet
+- **Payment stuck on PENDING**: The payment status updates automatically when the transaction is confirmed on-chain
 
