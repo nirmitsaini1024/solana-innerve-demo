@@ -27,8 +27,11 @@ export async function processPaymentTransaction(params: ProcessPaymentParams) {
     network,
   } = params
 
+  // Use custom RPC endpoint if provided, otherwise fall back to public endpoint
+  const rpcEndpoint = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl(network)
+  
   const connection = new Connection(
-    clusterApiUrl(network),
+    rpcEndpoint,
     'confirmed'
   )
 

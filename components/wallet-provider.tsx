@@ -9,7 +9,15 @@ import { clusterApiUrl } from '@solana/web3.js'
 
 export function WalletProvider({ children }: { children: React.ReactNode }) {
   const network = (process.env.NEXT_PUBLIC_SOLANA_NETWORK as WalletAdapterNetwork) || WalletAdapterNetwork.Devnet
-  const endpoint = useMemo(() => clusterApiUrl(network), [network])
+  
+  // Use custom RPC endpoint if provided, otherwise fall back to public endpoint
+  const endpoint = useMemo(() => {
+    const customRpc = process.env.NEXT_PUBLIC_SOLANA_RPC_URL
+    if (customRpc) {
+      return customRpc
+    }
+    return clusterApiUrl(network)
+  }, [network])
 
   const wallets = useMemo(
     () => [

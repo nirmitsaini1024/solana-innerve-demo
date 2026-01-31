@@ -33,7 +33,15 @@ import { PaymentWidgetConfig } from "./types"
 
 export function PaymentWidget(config: PaymentWidgetConfig) {
   const network = (config.network || 'devnet') as WalletAdapterNetwork
-  const endpoint = useMemo(() => clusterApiUrl(network), [network])
+  
+  // Use custom RPC endpoint if provided, otherwise fall back to public endpoint
+  const endpoint = useMemo(() => {
+    const customRpc = process.env.NEXT_PUBLIC_SOLANA_RPC_URL
+    if (customRpc) {
+      return customRpc
+    }
+    return clusterApiUrl(network)
+  }, [network])
 
   const wallets = useMemo(
     () => [
