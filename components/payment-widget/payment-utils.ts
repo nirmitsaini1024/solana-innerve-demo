@@ -13,7 +13,10 @@ import {
 } from '@solana/spl-token'
 
 // Token mint addresses
-const TOKEN_MINTS = {
+type Network = 'devnet' | 'mainnet-beta'
+type Currency = 'USDC' | 'USDT'
+
+const TOKEN_MINTS: Record<Currency, Record<Network, string>> = {
   USDC: {
     devnet: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU',
     'mainnet-beta': 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
