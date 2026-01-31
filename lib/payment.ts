@@ -12,14 +12,17 @@ import {
 } from '@solana/spl-token'
 
 // Token mint addresses
-const TOKEN_MINTS = {
+type Network = 'devnet' | 'mainnet-beta'
+type Currency = 'USDC' | 'USDT'
+
+const TOKEN_MINTS: Record<Currency, Record<Network, string>> = {
   USDC: {
     devnet: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU', // USDC devnet
-    mainnet: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', // USDC mainnet
+    'mainnet-beta': 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', // USDC mainnet
   },
   USDT: {
     devnet: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', // USDT devnet
-    mainnet: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', // USDT mainnet
+    'mainnet-beta': 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', // USDT mainnet
   },
 }
 
