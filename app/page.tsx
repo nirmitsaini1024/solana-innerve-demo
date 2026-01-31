@@ -142,7 +142,7 @@ export default function Home() {
                   )}
                 </div>
                 <div className="text-2xl font-bold text-primary mt-4">
-                  {plan.price.toFixed(3)} USDC
+                  {plan.price.toFixed(3)} SOL
                 </div>
               </div>
             ))}
@@ -174,7 +174,7 @@ export default function Home() {
                       {service.description}
                     </p>
                     <div className="text-lg font-bold text-primary">
-                      {service.price.toFixed(3)} USDC
+                      {service.price.toFixed(3)} SOL
                     </div>
                   </div>
                   <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ml-4 ${
@@ -201,7 +201,7 @@ export default function Home() {
               <div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">Total</div>
                 <div className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {totalPrice().toFixed(3)} USDC
+                  {totalPrice().toFixed(3)} SOL
                 </div>
               </div>
               <button
